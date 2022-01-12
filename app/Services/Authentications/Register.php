@@ -2,7 +2,7 @@
 
 namespace App\Services\Authentications;
 
-use App\Actions\Authentications\{ConventionalRegister, GetUserByProvider, UpdateToken};
+use App\Actions\Authentications\{ConventionalRegister};
 
 
 class Register

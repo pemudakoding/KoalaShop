@@ -24,7 +24,7 @@ class ConventionalRegister
             ->plainTextToken;
 
         return [
-            'user' => $user,
+            'user' => $user->name,
             'access_token' => $token,
             'token_type' => 'bearer'
         ];
