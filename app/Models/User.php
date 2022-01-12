@@ -41,4 +41,10 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public static function getUserByEmail($email)
+    {
+
+        return self::where('email', $email)->first();
+    }
 }

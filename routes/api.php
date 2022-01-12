@@ -2,7 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Authentication\{CallbackController, RegisterController};
+use App\Http\Controllers\Authentication\{LoginController, RegisterController};
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -24,5 +24,8 @@ Route::prefix('auth')
 
 
         Route::post('register', [RegisterController::class, 'conventionalRegister'])
-            ->name('conventional');
+            ->name('register.conventional');
+
+        Route::post('login', [LoginController::class, 'conventionalLogin'])
+            ->name('login.conventional');
     });
