@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Actions\Address\{StoreAddress, GetUserAddress};
+use App\Contracts\ClientResponse;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\User\StoreAddressRequest;
 use App\Models\UserAddress;
@@ -11,6 +12,7 @@ use App\Models\UserAddress;
 class AddressController extends Controller
 {
 
+    use ClientResponse;
 
     public function index(GetUserAddress $address)
     {
@@ -18,10 +20,7 @@ class AddressController extends Controller
 
         $addresses = $address->get(auth('sanctum')->user()->id);
 
-        return response()
-            ->json($addresses, $addresses['code'], [
-                'Content-Type' => 'application/json'
-            ]);
+        $this->response($addresses);
     }
 
     public function store(StoreAddressRequest $request, StoreAddress $addresAction)
@@ -30,9 +29,6 @@ class AddressController extends Controller
 
         $storedAddress = $addresAction->execute($request);
 
-        return response()
-            ->json($storedAddress, $storedAddress['code'], [
-                'Content-Type' => 'application/json'
-            ]);
+        $this->response($storedAddress);
     }
 }
