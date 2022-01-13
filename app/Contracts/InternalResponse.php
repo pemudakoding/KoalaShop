@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Abstracts;
+namespace App\Contracts;
 
-abstract class Response
+trait InternalResponse
 {
 
-    protected function InternalResponse(string $msg, array $data, int $httpStatus): array
+    public function response(string $msg, array|object $data, int $httpStatus): array
     {
         return [
             'msg' => $msg,
