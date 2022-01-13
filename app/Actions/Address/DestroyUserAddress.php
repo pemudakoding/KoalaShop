@@ -3,13 +3,20 @@
 namespace App\Actions\Address;
 
 use App\Contracts\InternalResponse;
-use App\Models\User;
 use App\Models\UserAddress;
+use App\Repositories\Address\EloquentUserAddressRepository;
 
 class DestroyUserAddress
 {
 
     use InternalResponse;
+
+    private object $userAddressRepository;
+
+    public function __construct()
+    {
+        $this->userAddressRepository = new EloquentUserAddressRepository();
+    }
 
     public function delete(UserAddress|string $addressOrSlug): array
     {
@@ -22,8 +29,10 @@ class DestroyUserAddress
     {
 
         if (gettype($addressOrSlug) === 'string') {
-            return UserAddress::getUserAddressBySlug($addressOrSlug);
+
+            return $this->userAddressRepository->getUserAddressBySlug($addressOrSlug);
         } else {
+
             return $addressOrSlug;
         }
     }
@@ -31,7 +40,7 @@ class DestroyUserAddress
     private function execute(UserAddress $address): array
     {
 
-        $destroying = $address->delete();
+        $destroying = $this->userAddressRepository->delete($address);
 
         if ($destroying)
             return $this->response('Successfully deleted address', null, 200);

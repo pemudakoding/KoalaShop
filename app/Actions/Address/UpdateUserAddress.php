@@ -4,12 +4,21 @@ namespace App\Actions\Address;
 
 use App\Contracts\InternalResponse;
 use App\Models\UserAddress;
+use App\Repositories\Address\EloquentUserAddressRepository;
 use Illuminate\Support\Str;
 
 class UpdateUserAddress
 {
 
     use InternalResponse;
+
+    private object $userAddressRepository;
+
+    public function __construct()
+    {
+        $this->userAddressRepository = new EloquentUserAddressRepository();
+    }
+
 
     public function update(UserAddress|string $addressOrSlug, array $data): array
     {
@@ -24,7 +33,7 @@ class UpdateUserAddress
     {
 
         if (gettype($addressOrSlug) === 'string') {
-            return UserAddress::getUserAddressBySlug($addressOrSlug);
+            return $this->userAddressRepository->getUserAddressBySlug($addressOrSlug);
         } else {
             return $addressOrSlug;
         }
@@ -35,7 +44,7 @@ class UpdateUserAddress
         $addressSlug = Str::slug($data['title'] . " " . date('jwyzhi'));
         $data['slug'] = $addressSlug;
 
-        $address->update($data);
+        $this->userAddressRepository->update($address, $data);
 
         return ['slug' => $addressSlug];
     }

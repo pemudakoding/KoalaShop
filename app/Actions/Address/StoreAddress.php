@@ -3,13 +3,20 @@
 namespace App\Actions\Address;
 
 use App\Contracts\InternalResponse;
-use App\Models\UserAddress;
+use App\Repositories\Address\EloquentUserAddressRepository;
 use Illuminate\Support\Str;
 
 class StoreAddress
 {
 
     use InternalResponse;
+
+    private object $userAddressRepository;
+
+    public function __construct()
+    {
+        $this->userAddressRepository = new EloquentUserAddressRepository();
+    }
 
     public function store($request): bool|array
     {
@@ -24,12 +31,13 @@ class StoreAddress
 
     private function execute(array $data): array
     {
-        $address = UserAddress::where('slug', $data['slug'])->first();
+        $address = $this->userAddressRepository->getUserAddressBySlug($data['slug']);
+
         if ($address) {
             return $this->response('Failed create duplicate address', null, 400);
         }
 
-        $address = UserAddress::create($data);
+        $address = $this->userAddressRepository->create($data);
 
         return $this->response(
             'Successfully creating address',
