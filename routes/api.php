@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Authentication\{LoginController, RegisterController};
+use App\Http\Controllers\User\{AddressController};
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -28,4 +29,23 @@ Route::prefix('auth')
 
         Route::post('login', [LoginController::class, 'conventionalLogin'])
             ->name('login.conventional');
+    });
+
+
+Route::middleware(['auth:sanctum'])
+    ->prefix('users')
+    ->name('users.')
+    ->group(function () {
+    });
+
+
+Route::middleware(['auth:sanctum'])
+    ->prefix('user/address')
+    ->name('user.address')
+    ->group(function () {
+
+        Route::get('', [AddressController::class, 'index'])
+            ->name('index');
+        Route::post('', [AddressController::class, 'store'])
+            ->name('store');
     });
