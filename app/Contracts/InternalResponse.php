@@ -5,7 +5,7 @@ namespace App\Contracts;
 trait InternalResponse
 {
 
-    public function response(string $msg, array|object $data, int $httpStatus): array
+    public function response(string $msg, mixed $data, int $httpStatus): array
     {
         return [
             'msg' => $msg,
