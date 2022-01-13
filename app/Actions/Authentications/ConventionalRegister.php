@@ -27,7 +27,7 @@ class ConventionalRegister
             ->plainTextToken;
 
         return $this->response(
-            'Successfully register',
+            'User successfully registered!',
             [
                 'user' => $user->name,
                 'access_token' => $token,
