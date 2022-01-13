@@ -48,4 +48,10 @@ Route::middleware(['auth:sanctum'])
             ->name('index');
         Route::post('', [AddressController::class, 'store'])
             ->name('store');
+
+        Route::get('/{userAddress:slug}', [AddressController::class, 'show'])
+            ->name('index');
+
+        Route::delete('/{userAddress:slug}', [AddressController::class, 'destroy'])
+            ->name('destroy');
     });

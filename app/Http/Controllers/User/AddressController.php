@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\User;
 
-use App\Actions\Address\{StoreAddress, GetUserAddress};
+use App\Actions\Address\{DestroyUserAddress, GetDetailUserAddress, StoreAddress, GetUserAddress};
 use App\Contracts\ClientResponse;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\User\StoreAddressRequest;
@@ -18,17 +18,36 @@ class AddressController extends Controller
     {
         $this->authorize('viewAny', UserAddress::class);
 
-        $addresses = $address->get(auth('sanctum')->user()->id);
+        $userId = auth('sanctum')->user()->id;
+        $addresses = $address->get($userId);
 
-        $this->response($addresses);
+        return $this->response($addresses);
     }
 
     public function store(StoreAddressRequest $request, StoreAddress $addresAction)
     {
         $this->authorize('create', UserAddress::class);
 
-        $storedAddress = $addresAction->execute($request);
+        $storedAddress = $addresAction->store($request);
 
-        $this->response($storedAddress);
+        return $this->response($storedAddress);
+    }
+
+    public function show(UserAddress $userAddress, GetDetailUserAddress $addresAction)
+    {
+        $this->authorize('view', $userAddress);
+
+        $userAddress = $addresAction->get($userAddress);
+
+        return $this->response($userAddress);
+    }
+
+    public function destroy(UserAddress $userAddress, DestroyUserAddress $addresAction)
+    {
+        $this->authorize('delete', $userAddress);
+
+        $deleted = $addresAction->delete($userAddress);
+
+        return $this->response($deleted);
     }
 }

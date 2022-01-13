@@ -30,7 +30,8 @@ class UserAddressPolicy
      */
     public function view(User $user, UserAddress $userAddress)
     {
-        //
+
+        return $user->id === $userAddress->user_id;
     }
 
     /**
@@ -66,7 +67,7 @@ class UserAddressPolicy
      */
     public function delete(User $user, UserAddress $userAddress)
     {
-        //
+        return $user->id === $userAddress->user_id;
     }
 
     /**

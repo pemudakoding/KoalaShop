@@ -11,7 +11,7 @@ class StoreAddress
 
     use InternalResponse;
 
-    public function execute($request): bool|array
+    public function store($request): bool|array
     {
         $userId = $request->user()->id;
 
@@ -19,10 +19,10 @@ class StoreAddress
         $requestBody['slug'] = Str::slug($requestBody['title']);
         $requestBody['user_id'] = $userId;
 
-        return $this->store($requestBody);
+        return $this->execute($requestBody);
     }
 
-    private function store(array $data): array
+    private function execute(array $data): array
     {
         $address = UserAddress::where('slug', $data['slug'])->first();
         if ($address) {
