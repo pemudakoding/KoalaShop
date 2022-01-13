@@ -4,6 +4,7 @@ namespace App\Actions\Authentications;
 
 use App\Contracts\InternalResponse;
 use App\Models\User;
+use App\Repositories\User\EloquentUserRepository;
 use Illuminate\Support\Facades\Hash;
 
 class ConventionalRegister
@@ -11,11 +12,17 @@ class ConventionalRegister
 
     use InternalResponse;
 
+    public function __construct()
+    {
+        $this->userRepository = new EloquentUserRepository();
+    }
+
     public function execute($request): array
     {
 
         $userPassword = Hash::make($request->password);
-        $user = User::firstOrCreate(
+
+        $user = $this->userRepository->firstOrCreate(
             ['email' => $request->email],
             [
                 'name' => $request->name,

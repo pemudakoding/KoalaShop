@@ -6,16 +6,24 @@ use App\Contracts\InternalResponse;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+use App\Repositories\User\EloquentUserRepository;
 
 class ConventionalLogin
 {
 
     use InternalResponse;
 
+    private object $userRepository;
+
+    public function __construct()
+    {
+        $this->userRepository = new EloquentUserRepository();
+    }
+
     public function execute($request): array
     {
 
-        $user = User::getUserByEmail($request->email);
+        $user = $this->userRepository->getUserByEmail($request->email);
 
         if (!$user || !Hash::check($request->password, $user->password)) {
             throw ValidationException::withMessages([
