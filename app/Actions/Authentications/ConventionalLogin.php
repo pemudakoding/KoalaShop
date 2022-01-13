@@ -2,12 +2,15 @@
 
 namespace App\Actions\Authentications;
 
+use App\Contracts\InternalResponse;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 
 class ConventionalLogin
 {
+
+    use InternalResponse;
 
     public function execute($request): array
     {
@@ -24,10 +27,14 @@ class ConventionalLogin
             ->plainTextToken;
 
 
-        return [
-            'user' => $user->name,
-            'access_token' => $token,
-            'token_type' => 'bearer'
-        ];
+        return $this->response(
+            'Successfully signin',
+            [
+                'user' => $user->name,
+                'access_token' => $token,
+                'token_type' => 'bearer'
+            ],
+            200
+        );
     }
 }

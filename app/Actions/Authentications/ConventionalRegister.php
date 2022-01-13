@@ -2,11 +2,14 @@
 
 namespace App\Actions\Authentications;
 
+use App\Contracts\InternalResponse;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
 class ConventionalRegister
 {
+
+    use InternalResponse;
 
     public function execute($request): array
     {
@@ -23,10 +26,14 @@ class ConventionalRegister
         $token = $user->createToken('auth_token')
             ->plainTextToken;
 
-        return [
-            'user' => $user->name,
-            'access_token' => $token,
-            'token_type' => 'bearer'
-        ];
+        return $this->response(
+            'Successfully register',
+            [
+                'user' => $user->name,
+                'access_token' => $token,
+                'token_type' => 'bearer'
+            ],
+            200
+        );
     }
 }
