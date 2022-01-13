@@ -51,7 +51,8 @@ Route::middleware(['auth:sanctum'])
 
         Route::get('/{userAddress:slug}', [AddressController::class, 'show'])
             ->name('index');
-
         Route::delete('/{userAddress:slug}', [AddressController::class, 'destroy'])
             ->name('destroy');
+        Route::put('/{userAddress:slug}', [AddressController::class, 'update'])
+            ->name('update');
     });

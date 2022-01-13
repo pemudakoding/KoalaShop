@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\User;
 
-use App\Actions\Address\{DestroyUserAddress, GetDetailUserAddress, StoreAddress, GetUserAddress};
+use App\Actions\Address\{DestroyUserAddress, GetDetailUserAddress, StoreAddress, GetUserAddress, UpdateUserAddress};
 use App\Contracts\ClientResponse;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\User\StoreAddressRequest;
+use App\Http\Requests\User\Address\{StoreAddressRequest, UpdateAddressRequest};
 use App\Models\UserAddress;
 
 
@@ -40,6 +40,15 @@ class AddressController extends Controller
         $userAddress = $addresAction->get($userAddress);
 
         return $this->response($userAddress);
+    }
+
+    public function update(UpdateAddressRequest $request, UserAddress $userAddress, UpdateUserAddress $addresAction)
+    {
+        $this->authorize('update', $userAddress);
+
+        $updateUserAddress = $addresAction->update($userAddress, $request->only(['title', 'address']));
+
+        return $this->response($updateUserAddress);
     }
 
     public function destroy(UserAddress $userAddress, DestroyUserAddress $addresAction)
