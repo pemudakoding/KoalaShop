@@ -2,23 +2,12 @@
 
 namespace App\Actions\Authentications;
 
-use App\Contracts\InternalResponse;
+use App\Abstracts\Actions\AuthenticationBaseAction;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Hash;
-use App\Models\User;
-use App\Repositories\User\EloquentUserRepository;
 
-class ConventionalLogin
+class ConventionalLogin extends AuthenticationBaseAction
 {
-
-    use InternalResponse;
-
-    private object $userRepository;
-
-    public function __construct()
-    {
-        $this->userRepository = new EloquentUserRepository();
-    }
 
     public function execute($request): array
     {

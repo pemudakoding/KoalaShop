@@ -2,20 +2,11 @@
 
 namespace App\Actions\Authentications;
 
-use App\Contracts\InternalResponse;
-use App\Models\User;
-use App\Repositories\User\EloquentUserRepository;
+use App\Abstracts\Actions\AuthenticationBaseAction;
 use Illuminate\Support\Facades\Hash;
 
-class ConventionalRegister
+class ConventionalRegister extends AuthenticationBaseAction
 {
-
-    use InternalResponse;
-
-    public function __construct()
-    {
-        $this->userRepository = new EloquentUserRepository();
-    }
 
     public function execute($request): array
     {
