@@ -70,4 +70,6 @@ Route::middleware(['auth:sanctum'])
             ->name('store');
         Route::put('{product:slug}', [ProductController::class, 'update'])
             ->name('update');
+        Route::delete('{product:slug}', [ProductController::class, 'destroy'])
+            ->name('destroy');
     });

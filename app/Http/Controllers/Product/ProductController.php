@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Product;
 
-use App\Actions\Product\{GetDetailProduct, UpdateProduct};
+use App\Actions\Product\{DestroyProduct, GetDetailProduct, UpdateProduct};
 use App\Contracts\ClientResponse;
 use App\Services\Product\ProductService;
 use App\Http\Controllers\Controller;
@@ -39,6 +39,15 @@ class ProductController extends Controller
         $this->authorize('update', $product);
 
         $product = $productAction->update($product, $request);
+
+        return $this->response($product);
+    }
+
+    public function destroy(Product $product, DestroyProduct $productAction)
+    {
+        $this->authorize('delete', $product);
+
+        $product = $productAction->delete($product);
 
         return $this->response($product);
     }
