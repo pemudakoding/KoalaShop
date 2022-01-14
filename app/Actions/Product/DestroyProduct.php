@@ -2,21 +2,11 @@
 
 namespace App\Actions\Product;
 
-use App\Contracts\InternalResponse;
+use App\Abstracts\Actions\ProductBaseAction;
 use App\Models\Product;
-use App\Repositories\Product\EloquentProductRepository;
 
-class DestroyProduct
+class DestroyProduct extends ProductBaseAction
 {
-
-    use InternalResponse;
-
-    private EloquentProductRepository $productRepository;
-
-    public function __construct()
-    {
-        $this->productRepository = new EloquentProductRepository;
-    }
 
     public function delete(Product|string $productObjectOrSlug): array
     {

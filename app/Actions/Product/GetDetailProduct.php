@@ -2,22 +2,12 @@
 
 namespace App\Actions\Product;
 
-use App\Contracts\InternalResponse;
+use App\Abstracts\Actions\ProductBaseAction;
 use App\Models\Product;
-use App\Repositories\Product\EloquentProductRepository;
 use Illuminate\Database\Eloquent\Builder;
 
-class GetDetailProduct
+class GetDetailProduct extends ProductBaseAction
 {
-
-    use InternalResponse;
-
-    private EloquentProductRepository $productRepository;
-
-    public function __construct()
-    {
-        $this->productRepository = new EloquentProductRepository;
-    }
 
     public function get(Product|string $objectOrSlug)
     {

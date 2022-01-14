@@ -2,21 +2,11 @@
 
 namespace App\Actions\Product;
 
-use App\Contracts\InternalResponse;
-use App\Repositories\Product\EloquentProductRepository;
+use App\Abstracts\Actions\ProductBaseAction;
 use Illuminate\Support\Str;
 
-class StoreProduct
+class StoreProduct extends ProductBaseAction
 {
-
-    use InternalResponse;
-
-    private EloquentProductRepository $productRepository;
-
-    public function __construct()
-    {
-        $this->productRepository = new EloquentProductRepository();
-    }
 
     public function store(object $request): array
     {

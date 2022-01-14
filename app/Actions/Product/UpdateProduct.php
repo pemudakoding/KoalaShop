@@ -2,22 +2,12 @@
 
 namespace App\Actions\Product;
 
-use App\Contracts\InternalResponse;
+use App\Abstracts\Actions\ProductBaseAction;
 use App\Models\Product;
-use App\Repositories\Product\EloquentProductRepository;
 use Illuminate\Support\Str;
 
-class UpdateProduct
+class UpdateProduct extends ProductBaseAction
 {
-
-    private EloquentProductRepository $productRepository;
-
-    use InternalResponse;
-
-    public function __construct()
-    {
-        $this->productRepository = new EloquentProductRepository();
-    }
 
     public function update(Product|string $productObjectOrSlug, object $request): array
     {
