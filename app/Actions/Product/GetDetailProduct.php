@@ -35,6 +35,6 @@ class GetDetailProduct
         } else {
             $slug = $objectOrSlug->slug;
         }
-        return $this->productRepository->getBySlug('sepatu-air-jordan-blue-14522131247');
+        return $this->productRepository->getBySlug($slug);
     }
 }
