@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Authentication\{LoginController, RegisterController};
+use App\Http\Controllers\Product\{ProductController};
 use App\Http\Controllers\User\{AddressController};
 /*
 |--------------------------------------------------------------------------
@@ -55,4 +56,13 @@ Route::middleware(['auth:sanctum'])
             ->name('destroy');
         Route::put('/{userAddress:slug}', [AddressController::class, 'update'])
             ->name('update');
+    });
+
+Route::middleware(['auth:sanctum'])
+    ->prefix('user/product')
+    ->name('user.product.')
+    ->group(function () {
+
+        Route::post('', [ProductController::class, 'store'])
+            ->name('store');
     });

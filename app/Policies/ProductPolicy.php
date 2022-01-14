@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Policies\User;
+namespace App\Policies;
 
+use App\Models\Product;
 use App\Models\User;
-use App\Models\UserAddress;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class UserAddressPolicy
+class ProductPolicy
 {
     use HandlesAuthorization;
 
@@ -18,20 +18,19 @@ class UserAddressPolicy
      */
     public function viewAny(User $user)
     {
-        return true;
+        //
     }
 
     /**
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\UserAddress  $userAddress
+     * @param  \App\Models\Product  $product
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, UserAddress $userAddress)
+    public function view(User $user, Product $product)
     {
-
-        return $user->id === $userAddress->user_id;
+        //
     }
 
     /**
@@ -42,7 +41,6 @@ class UserAddressPolicy
      */
     public function create(User $user)
     {
-
         return true;
     }
 
@@ -50,34 +48,34 @@ class UserAddressPolicy
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\UserAddress  $userAddress
+     * @param  \App\Models\Product  $product
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, UserAddress $userAddress)
+    public function update(User $user, Product $product)
     {
-        return $user->id === $userAddress->user_id;
+        //
     }
 
     /**
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\UserAddress  $userAddress
+     * @param  \App\Models\Product  $product
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, UserAddress $userAddress)
+    public function delete(User $user, Product $product)
     {
-        return $user->id === $userAddress->user_id;
+        //
     }
 
     /**
      * Determine whether the user can restore the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\UserAddress  $userAddress
+     * @param  \App\Models\Product  $product
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, UserAddress $userAddress)
+    public function restore(User $user, Product $product)
     {
         //
     }
@@ -86,10 +84,10 @@ class UserAddressPolicy
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\UserAddress  $userAddress
+     * @param  \App\Models\Product  $product
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, UserAddress $userAddress)
+    public function forceDelete(User $user, Product $product)
     {
         //
     }
