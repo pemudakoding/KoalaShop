@@ -20,4 +20,10 @@ class EloquentProductRepository implements ProductRepositoryInterface
         return Product::with(['productOwner'])
             ->where('slug', $slug)->first();
     }
+
+    public function update(Product $productObject, $data): bool
+    {
+
+        return $productObject->update($data);
+    }
 }
