@@ -5,7 +5,7 @@ namespace App\Abstracts\Actions;
 use App\Contracts\InternalResponse;
 use App\Repositories\Address\EloquentUserAddressRepository;
 
-class UserAddressBaseAction
+abstract class UserAddressBaseAction
 {
     use InternalResponse;
 
