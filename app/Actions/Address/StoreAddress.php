@@ -2,21 +2,11 @@
 
 namespace App\Actions\Address;
 
-use App\Contracts\InternalResponse;
-use App\Repositories\Address\EloquentUserAddressRepository;
+use App\Abstracts\Actions\UserAddressBaseAction;
 use Illuminate\Support\Str;
 
-class StoreAddress
+class StoreAddress extends UserAddressBaseAction
 {
-
-    use InternalResponse;
-
-    private object $userAddressRepository;
-
-    public function __construct()
-    {
-        $this->userAddressRepository = new EloquentUserAddressRepository();
-    }
 
     public function store($request): bool|array
     {

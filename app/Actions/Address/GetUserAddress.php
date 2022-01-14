@@ -2,22 +2,10 @@
 
 namespace App\Actions\Address;
 
-use App\Abstracts\Response as AbstractResponse;
-use App\Contracts\InternalResponse;
-use App\Repositories\Address\EloquentUserAddressRepository;
+use App\Abstracts\Actions\UserAddressBaseAction;
 
-class GetUserAddress
+class GetUserAddress  extends UserAddressBaseAction
 {
-
-    use InternalResponse;
-
-    private object $userAddressRepository;
-
-    public function __construct()
-    {
-        $this->userAddressRepository = new EloquentUserAddressRepository();
-    }
-
 
     public function get(int $userId): array
     {

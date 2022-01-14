@@ -2,23 +2,12 @@
 
 namespace App\Actions\Address;
 
-use App\Contracts\InternalResponse;
+use App\Abstracts\Actions\UserAddressBaseAction;
 use App\Models\UserAddress;
-use App\Repositories\Address\EloquentUserAddressRepository;
 use Illuminate\Support\Str;
 
-class UpdateUserAddress
+class UpdateUserAddress extends UserAddressBaseAction
 {
-
-    use InternalResponse;
-
-    private object $userAddressRepository;
-
-    public function __construct()
-    {
-        $this->userAddressRepository = new EloquentUserAddressRepository();
-    }
-
 
     public function update(UserAddress|string $addressOrSlug, array $data): array
     {

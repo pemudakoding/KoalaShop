@@ -2,21 +2,11 @@
 
 namespace App\Actions\Address;
 
-use App\Contracts\InternalResponse;
+use App\Abstracts\Actions\UserAddressBaseAction;
 use App\Models\UserAddress;
-use App\Repositories\Address\EloquentUserAddressRepository;
 
-class DestroyUserAddress
+class DestroyUserAddress extends UserAddressBaseAction
 {
-
-    use InternalResponse;
-
-    private object $userAddressRepository;
-
-    public function __construct()
-    {
-        $this->userAddressRepository = new EloquentUserAddressRepository();
-    }
 
     public function delete(UserAddress|string $addressOrSlug): array
     {
