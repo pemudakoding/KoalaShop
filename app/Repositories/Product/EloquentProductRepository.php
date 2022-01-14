@@ -4,6 +4,7 @@ namespace App\Repositories\Product;
 
 use App\Interfaces\ProductRepositoryInterface;
 use App\Models\Product;
+use App\Models\User;
 
 class EloquentProductRepository implements ProductRepositoryInterface
 {
@@ -12,5 +13,11 @@ class EloquentProductRepository implements ProductRepositoryInterface
     {
 
         return Product::create($data);
+    }
+
+    public function getBySlug(string $slug): Product
+    {
+        return Product::with(['productOwner'])
+            ->where('slug', $slug)->first();
     }
 }

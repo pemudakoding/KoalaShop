@@ -65,4 +65,6 @@ Route::middleware(['auth:sanctum'])
 
         Route::post('', [ProductController::class, 'store'])
             ->name('store');
+        Route::get('{product:slug}', [ProductController::class, 'show'])
+            ->name('store');
     });

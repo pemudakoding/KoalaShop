@@ -13,4 +13,9 @@ class Product extends Model
         'slug', 'name', 'description',
         'stocks', 'price', 'user_id'
     ];
+
+    public function productOwner()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
 }
