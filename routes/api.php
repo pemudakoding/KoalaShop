@@ -3,8 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Authentication\{LoginController, RegisterController};
-use App\Http\Controllers\Product\{ProductController};
-use App\Http\Controllers\User\{AddressController};
+use App\Http\Controllers\User\{AddressController, ProductController};
 /*
 |--------------------------------------------------------------------------
 | API Routes
