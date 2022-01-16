@@ -3,6 +3,7 @@
 namespace App\Actions\Authentications;
 
 use App\Abstracts\Actions\AuthenticationBaseAction;
+use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
 class ConventionalRegister extends AuthenticationBaseAction
@@ -11,12 +12,12 @@ class ConventionalRegister extends AuthenticationBaseAction
     public function execute($request): array
     {
 
-        $userPassword = Hash::make($request->password);
+        $userPassword = Hash::make($request['password']);
 
-        $user = $this->userRepository->firstOrCreate(
-            ['email' => $request->email],
+        $user = User::firstOrCreate(
+            ['email' => $request['email']],
             [
-                'name' => $request->name,
+                'name' => $request['name'],
                 'password' => $userPassword
             ]
         );

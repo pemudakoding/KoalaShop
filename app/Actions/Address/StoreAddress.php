@@ -3,6 +3,7 @@
 namespace App\Actions\Address;
 
 use App\Abstracts\Actions\UserAddressBaseAction;
+use App\Models\UserAddress;
 use Illuminate\Support\Str;
 
 class StoreAddress extends UserAddressBaseAction
@@ -21,13 +22,13 @@ class StoreAddress extends UserAddressBaseAction
 
     private function execute(array $data): array
     {
-        $address = $this->userAddressRepository->getUserAddressBySlug($data['slug']);
+        $address = UserAddress::getAddressInstaceBySlug($data['slug']);
 
         if ($address) {
             return $this->response('Failed create duplicate address', null, 400);
         }
 
-        $address = $this->userAddressRepository->create($data);
+        $address = UserAddress::create($data);
 
         return $this->response(
             'Successfully creating address',

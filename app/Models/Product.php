@@ -18,4 +18,11 @@ class Product extends Model
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
+
+    public static function getInstanceBySlug(string $slug)
+    {
+        return self::select('id')
+            ->where('slug', $slug)
+            ->first();
+    }
 }

@@ -3,6 +3,7 @@
 namespace App\Actions\Product;
 
 use App\Abstracts\Actions\ProductBaseAction;
+use App\Models\Product;
 
 class GetProduct extends ProductBaseAction
 {
@@ -17,21 +18,18 @@ class GetProduct extends ProductBaseAction
     public function execute($userId, $request)
     {
 
-        $productTitle = $request->title ?? null;
+        $productTitle = $request['title'] ?? null;
 
-        if ($userId && $productTitle)
-            return $this->productRepository
-                ->getByName($productTitle, $userId);
+        $productInstance = Product::query();
 
-        if ($productTitle && !$userId)
-            return $this->productRepository
-                ->getByName($productTitle, $userId);
+        $productInstance->with(['productOwner']);
 
-        if ($userId && !$productTitle)
-            return $this->productRepository
-                ->getByUserId($userId);
+        if ($userId)
+            $productInstance->where('user_id', $userId);
 
-        return $this->productRepository
-            ->get();
+        if ($productTitle)
+            $productInstance->where('name', $productTitle);
+
+        return $productInstance->get();
     }
 }

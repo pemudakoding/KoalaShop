@@ -18,7 +18,7 @@ class GetDetailUserAddress extends UserAddressBaseAction
     private function execute(UserAddress|string $addressOrSlug): object
     {
         if (gettype($addressOrSlug) === 'string') {
-            return $this->userAddressRepository->getUserAddressBySlug($addressOrSlug);
+            return UserAddress::getAddressBySlug($addressOrSlug);
         } else {
 
             $address = $addressOrSlug;

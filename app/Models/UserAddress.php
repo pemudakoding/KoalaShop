@@ -18,4 +18,17 @@ class UserAddress extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+
+    public static function getAddressBySlug(string $slug)
+    {
+        return self::where('slug', $slug)
+            ->first();
+    }
+
+    public static function getAddressInstaceBySlug(string $slug)
+    {
+        return self::select('id')
+            ->where('slug', $slug)
+            ->first();
+    }
 }

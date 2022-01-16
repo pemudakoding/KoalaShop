@@ -9,14 +9,14 @@ use Illuminate\Support\Str;
 class UpdateProduct extends ProductBaseAction
 {
 
-    public function update(Product|string $productObjectOrSlug, object $request): array
+    public function update(Product|string $productObjectOrSlug, array $data): array
     {
 
         $product = $this->getProduct($productObjectOrSlug);
 
         if ($product) {
 
-            $update = $this->execute($product, $request);
+            $update = $this->execute($product, $data);
             return $this->response('Successfully updating product data!', $update, 200);
         }
 
@@ -31,16 +31,14 @@ class UpdateProduct extends ProductBaseAction
             $slug = $productObjectOrSlug->slug;
         }
 
-        return $this->productRepository->getBySlug($slug);
+        return Product::getInstanceBySlug($slug);
     }
 
-    private function execute(Product $product, object $request): array
+    private function execute(Product $product, $data): array
     {
-        $slug = Str::slug($request->name . " " . date('jwyzhi'));
+        $slug = Str::slug($data['name'] . " " . date('jwyzhi'));
 
-        $data = $request->all();
         $data['slug'] = $slug;
-
         return [
             'slug' => $slug,
             'status' => $product->update($data)

@@ -25,6 +25,8 @@ class GetDetailProduct extends ProductBaseAction
         } else {
             $slug = $objectOrSlug->slug;
         }
-        return $this->productRepository->getBySlug($slug);
+        return Product::with(['productOwner'])
+            ->where('slug', $slug)
+            ->first();
     }
 }

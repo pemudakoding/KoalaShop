@@ -29,7 +29,7 @@ class DestroyProduct extends ProductBaseAction
             $slug = $productObjectOrSlug->slug;
         }
 
-        return $this->productRepository->getBySlug($slug);
+        return Product::getInstanceBySlug($slug);
     }
 
     private function execute(Product $product): bool|null

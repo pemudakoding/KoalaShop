@@ -3,27 +3,28 @@
 namespace App\Actions\Product;
 
 use App\Abstracts\Actions\ProductBaseAction;
+use App\Models\Product;
 use Illuminate\Support\Str;
 
 class StoreProduct extends ProductBaseAction
 {
 
-    public function store(object $request): array
+    public function store(array $data): array
     {
 
-        $storing = $this->execute($request);
+
+        $storing = $this->execute($data);
 
         return $this->response('Successfully creating product!', $storing, 201);
     }
 
-    private function execute(object $request): object
+    private function execute(array $data): object
     {
 
-        $slug = Str::slug($request->name . " " . date('jwyzhi'));
-        $productData = $request->only(['name', 'description', 'stocks', 'price']);
-        $productData['slug'] = $slug;
-        $productData['user_id'] = $request->user()->id;
+        $slug = Str::slug($data['name'] . " " . date('jwyzhi'));
+        $data['slug'] = $slug;
+        $data['user_id'] = auth('sanctum')->user()->id;
 
-        return $this->productRepository->create($productData);
+        return Product::create($data);
     }
 }

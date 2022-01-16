@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Product;
+namespace App\Http\Controllers\User;
 
 use App\Actions\Product\{DestroyProduct, GetDetailProduct, GetProduct, UpdateProduct};
 use App\Contracts\ClientResponse;
@@ -31,7 +31,7 @@ class ProductController extends Controller
     {
         $this->authorize('create', Product::class);
 
-        $product = $productService->store($request);
+        $product = $productService->store($request->toArray());
 
         return $this->response($product);
     }
@@ -50,7 +50,7 @@ class ProductController extends Controller
     {
         $this->authorize('update', $product);
 
-        $product = $productAction->update($product, $request);
+        $product = $productAction->update($product, $request->toArray());
 
         return $this->response($product);
     }

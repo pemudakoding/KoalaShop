@@ -22,7 +22,7 @@ class UpdateUserAddress extends UserAddressBaseAction
     {
 
         if (gettype($addressOrSlug) === 'string') {
-            return $this->userAddressRepository->getUserAddressBySlug($addressOrSlug);
+            return UserAddress::getAddressInstaceBySlug($addressOrSlug);
         } else {
             return $addressOrSlug;
         }
@@ -33,7 +33,7 @@ class UpdateUserAddress extends UserAddressBaseAction
         $addressSlug = Str::slug($data['title'] . " " . date('jwyzhi'));
         $data['slug'] = $addressSlug;
 
-        $this->userAddressRepository->update($address, $data);
+        $address->update($data);
 
         return ['slug' => $addressSlug];
     }

@@ -20,7 +20,7 @@ class DestroyUserAddress extends UserAddressBaseAction
 
         if (gettype($addressOrSlug) === 'string') {
 
-            return $this->userAddressRepository->getUserAddressBySlug($addressOrSlug);
+            return UserAddress::getAddressInstaceBySlug($addressOrSlug);
         } else {
 
             return $addressOrSlug;
@@ -30,7 +30,7 @@ class DestroyUserAddress extends UserAddressBaseAction
     private function execute(UserAddress $address): array
     {
 
-        $destroying = $this->userAddressRepository->delete($address);
+        $destroying = $address->delete();
 
         if ($destroying)
             return $this->response('Successfully deleted address', null, 200);

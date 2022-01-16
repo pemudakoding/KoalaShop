@@ -3,6 +3,7 @@
 namespace App\Actions\Authentications;
 
 use App\Abstracts\Actions\AuthenticationBaseAction;
+use App\Models\User;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Hash;
 
@@ -12,11 +13,12 @@ class ConventionalLogin extends AuthenticationBaseAction
     public function execute($request): array
     {
 
-        $user = $this->userRepository->getUserByEmail($request->email);
+        $user = User::where('email', $request['email'])
+            ->first();
 
-        if (!$user || !Hash::check($request->password, $user->password)) {
+        if (!$user || !Hash::check($request['password'], $user->password)) {
             throw ValidationException::withMessages([
-                'email' => ['The provided credentials are incorrect.'],
+                'email' => ['The provided credentials are incorrect.' . $user->password],
             ]);
         }
 
