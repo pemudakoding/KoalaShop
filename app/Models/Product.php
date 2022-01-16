@@ -25,4 +25,11 @@ class Product extends Model
             ->where('slug', $slug)
             ->first();
     }
+
+    public static function getProductPrice(int $productId)
+    {
+        return self::select('price')
+            ->where('id', $productId)
+            ->first();
+    }
 }

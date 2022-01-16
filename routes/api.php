@@ -3,7 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Authentication\{LoginController, RegisterController};
-use App\Http\Controllers\User\{AddressController, ProductController};
+use App\Http\Controllers\User\{AddressController, OrderController, ProductController};
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -73,4 +73,14 @@ Route::middleware(['auth:sanctum'])
             ->name('update');
         Route::delete('{product:slug}', [ProductController::class, 'destroy'])
             ->name('destroy');
+    });
+
+
+Route::middleware(['auth:sanctum'])
+    ->prefix('checkout')
+    ->name('order.')
+    ->group(function () {
+
+        Route::post('', [OrderController::class, 'store'])
+            ->name('store');
     });
