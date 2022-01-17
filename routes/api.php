@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Authentication\{LoginController, RegisterController};
+use App\Http\Controllers\Product\ClientProductController;
 use App\Http\Controllers\User\{AddressController, OrderController, ProductController};
 /*
 |--------------------------------------------------------------------------
@@ -75,6 +76,16 @@ Route::middleware(['auth:sanctum'])
             ->name('destroy');
     });
 
+
+Route::prefix('products')
+    ->name('products.')
+    ->group(function () {
+
+        Route::get('', [ClientProductController::class, 'index'])
+            ->name('index');
+        Route::get('{product:slug}', [ClientProductController::class, 'show'])
+            ->name('show');
+    });
 
 Route::middleware(['auth:sanctum'])
     ->prefix('checkout')

@@ -4,7 +4,7 @@ namespace App\Services\Product;
 
 use App\Actions\Product\StoreProduct;
 
-class ProductService
+class StoreProductService
 {
 
     public function store($request): array

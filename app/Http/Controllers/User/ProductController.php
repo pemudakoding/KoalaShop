@@ -4,11 +4,9 @@ namespace App\Http\Controllers\User;
 
 use App\Actions\Product\{DestroyProduct, GetDetailProduct, GetProduct, UpdateProduct};
 use App\Contracts\ClientResponse;
-use App\Services\Product\ProductService;
+use App\Services\Product\StoreProductService;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Product\SearchProductRequest;
-use App\Http\Requests\Product\StoreProductRequest;
-use App\Http\Requests\Product\UpdateProductRequest;
+use App\Http\Requests\Product\{SearchProductRequest, StoreProductRequest, UpdateProductRequest};
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -27,7 +25,7 @@ class ProductController extends Controller
         return $this->response($products);
     }
 
-    public function store(StoreProductRequest $request, ProductService $productService)
+    public function store(StoreProductRequest $request, StoreProductService $productService)
     {
         $this->authorize('create', Product::class);
 
