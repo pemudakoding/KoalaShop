@@ -28,7 +28,7 @@ class GetProduct extends ProductBaseAction
             $productInstance->where('user_id', $userId);
 
         if ($productTitle)
-            $productInstance->where('name', $productTitle);
+            $productInstance->where('name', "LIKE", "%$productTitle%");
 
         return $productInstance->get();
     }
