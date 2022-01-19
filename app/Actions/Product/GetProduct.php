@@ -22,7 +22,7 @@ class GetProduct extends ProductBaseAction
 
         $productInstance = Product::query();
 
-        $productInstance->with(['productOwner']);
+        $productInstance->with(['productOwner', 'photos']);
 
         if ($userId)
             $productInstance->where('user_id', $userId);

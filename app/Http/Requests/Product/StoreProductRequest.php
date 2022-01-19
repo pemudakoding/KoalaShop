@@ -28,6 +28,8 @@ class StoreProductRequest extends FormRequest
             'description' => 'required|string',
             'stocks' => 'required|integer|min:1',
             'price' => 'required|numeric',
+            'photos' => 'required',
+            'photos.*' => 'required|image|mimetypes:image/png,image/jpg,image/jpeg'
         ];
     }
 }

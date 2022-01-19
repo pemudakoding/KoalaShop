@@ -29,9 +29,10 @@ class ProductController extends Controller
     {
         $this->authorize('create', Product::class);
 
-        $product = $productService->store($request->toArray());
+        $product = $productService->store($request);
 
-        return $this->response($product);
+        return $product;
+        // return $this->response($product);
     }
 
     public function show(Product $product, GetDetailProduct $productAction)

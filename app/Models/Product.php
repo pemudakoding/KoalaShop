@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class Product extends Model
 {
@@ -17,6 +18,11 @@ class Product extends Model
     public function productOwner()
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
+    }
+
+    public function photos()
+    {
+        return $this->hasMany(ProductPhoto::class, 'product_id', 'id');
     }
 
     public static function getInstanceBySlug(string $slug)

@@ -25,7 +25,7 @@ class GetDetailProduct extends ProductBaseAction
         } else {
             $slug = $objectOrSlug->slug;
         }
-        return Product::with(['productOwner'])
+        return Product::with(['productOwner', 'photos'])
             ->where('slug', $slug)
             ->first();
     }
